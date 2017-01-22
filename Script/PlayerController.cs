@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour {
     public float radioCheckSuelo;
     public Transform checkSuelo;
     public bool dobleSalto;
+    public GameMAnager gameManager;
 
     private Collider2D myCollider;
     private Rigidbody2D RB;
@@ -20,6 +21,7 @@ public class PlayerController : MonoBehaviour {
         RB = GetComponent<Rigidbody2D>();
         myCollider = GetComponent<Collider2D>();
         anim = GetComponent<Animator>();
+       
        
 	}
 	
@@ -52,5 +54,13 @@ public class PlayerController : MonoBehaviour {
     public void Salto()
     {
         RB.velocity = new Vector2(RB.velocity.x, fuerza);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+        {
+        if (other.gameObject.tag == "muerte")
+        {
+            gameManager.ReiniciarJuego();
+        }
     }
 }
